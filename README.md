@@ -1,4 +1,4 @@
-# OOP_lab6
+# OOP_lab6, Jan Schmidt Jensen
 
 Revisiting lab2 ATM, implement SOLID principles
 
