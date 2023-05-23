@@ -1,0 +1,90 @@
+@startuml
+
+interface ITransaction{
+    +deposit()
+    +withdraw()
+    +transfer()
+}
+
+interface IMaintenance{
+    +maintainance()
+}
+
+interface IAccountManagement{
+    +lockAccount()
+    +getBalance()
+    +setBalance()
+    +pinValidation()
+    +updatePin()
+}
+
+class ATM{
+    -transaction : ITransaction
+    -maintenance : IMaintenance
+    -accountManagement : IAccountManagement
+    -accounts
+    -admin
+    -reserves
+}
+
+class Transaction implements ITransaction{
+    +deposit()
+    +withdraw()
+    +transfer()
+}
+
+class Maintenance implements IMaintenance{
+    +maintainance()
+}
+
+class Account implements IAccountManagement{
+    -accountName 
+    -accountNumber
+    -accountBalance
+    -pin
+    -isLocked
+    -hashFunction()
+    +lockAccount()
+    +getBalance()
+    +setBalance()
+    +pinValidation()
+    +updatePin()
+}
+
+class Admin{
+    -UserAdmin
+    -Password
+    +GetATMinfo()
+    -hashFunction()
+}
+
+class GUI{
+    +displayMenu()
+    +requestPinCode()
+    +requestAmount()
+    +requestTransactionsType()
+    +displayBalance()
+    +displayErrors()
+}
+
+class Security{
+    +encryptData
+    +decryptData
+    +pinValidation()
+}
+
+ATM *-* Admin
+ATM *-- GUI
+ATM *-- Security
+ATM *-- Transaction
+ATM *-- Maintenance
+ATM *-- Account
+Bank *- ATM
+Bank *-- Account
+Admin o----o Account
+
+Transaction ..|> ITransaction
+Maintenance ..|> IMaintenance
+Account ..|> IAccountManagement
+
+@enduml
